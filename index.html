@@ -24,11 +24,22 @@
       <div class="col-md-2">
         <div class="card card-body bg-light">
           <h6>Test Subject ID No.:</h6>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          <select id="selDataset" onchange="optionChanged(this.value)">
+          </select>
         </div>
         <div class="card card-primary">
           <div class="card-header">
             <h4 class="card-title">Demographic Info</h4>
+            <ul class="demographics"> 
+              <li class="eth"> ethnicity:  </li>
+              <li class="gen"> gender: </li>
+              <li class="age"> age: </li>
+              <li class="loc"> location: </li>
+              <li class="bbt"> bbtype: </li>
+              <li class="freq"> wfreq: </li>
+            </ul>
+        
+
           </div>
           <div id="sample-metadata" class="card-body"></div>
         </div>
@@ -47,8 +58,8 @@
     </div>
   </div>
 
-  <script src="./static/js/app.js"></script>
-  <script src="./static/js/bonus.js"></script>
+  <script src="./static/js/app1.js"></script>
+  <!-- <script src="./static/js/bonus.js"></script> -->
 
 </body>
 
