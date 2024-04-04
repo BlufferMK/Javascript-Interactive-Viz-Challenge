@@ -2,8 +2,8 @@
 const url = "https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json";
 
 // makePanel 1. loads the dataset , 2. drills down to data , 
-//     3. filters the data to get demographics , 4. clears the panel , 
-//     5. appends data to panel
+//     3. filters the data to get demographics ,  
+//    appends data to panel
 function makePanel(meta) {
     // Load the dataset
     d3.json(url).then(function (data) {
@@ -12,6 +12,7 @@ function makePanel(meta) {
         function selectBelly(id) {
             return id.id == meta;
         };
+        
         let currentBelly = dataArray.filter(selectBelly);
 
         d3.select(".eth").text(`ethnicity: ${currentBelly[0].ethnicity}`);
@@ -40,7 +41,7 @@ function makeBubbleChart(sample) {
         let sample_values = currentBelly[0].sample_values;
         let otu_ids = currentBelly[0].otu_ids;
         let otu_labels = currentBelly[0].otu_labels;
-     
+
 // setting up the bubble chart
         let bubble1 = {
             x: otu_ids,
@@ -64,7 +65,7 @@ function makeBubbleChart(sample) {
             }
         };
 //Create the bubble chart
-        Plotly.newPlot("bubble",bubble,layoutBub);
+        Plotly.newPlot("mx-auto",bubble,layoutBub);
     });
 
 }
@@ -89,10 +90,15 @@ function makeBarChart(sample) {
         let otu_ids = ot_ids.slice(0,9);
         let otu_labels = ot_labels.slice(0,9);
 
+
+        // add "OTU" to the beginning of each otu_id
+        var strotu_ids = otu_ids.map(str => 'OTU' + str);
+        console.log(strotu_ids);
+
 // setting up the horizontal bar chart
         let trace1 = {
             x: sample_values,
-            y: otu_ids,
+            y:strotu_ids,
             text: otu_labels,
             type: "bar",
             orientation: 'h'
@@ -106,9 +112,10 @@ function makeBarChart(sample) {
             yaxis: {
                 title: "Operational Taxonomic Unit ID",
                 type: 'category',
-                tickvals: otu_ids,
-                ticktext: otu_ids
-            }
+                tickvals: strotu_ids,
+                ticktext: strotu_ids
+            },
+            width: 1000
         };
 // Create the bar chart
         Plotly.newPlot("bar", plot, layout);
